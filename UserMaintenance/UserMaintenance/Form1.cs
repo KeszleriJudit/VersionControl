@@ -22,6 +22,7 @@ namespace UserMaintenance
             label1.Text = Resource.FullName;
             button2.Text = Resource.SaveFile;
             button1.Text = Resource.Add;
+            button3.Text = Resource.Delete;
 
             listBox1.DataSource = users;
             listBox1.ValueMember = "ID";
@@ -52,6 +53,16 @@ namespace UserMaintenance
                 }
                 sw.Close();
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Guid torlendoID = (Guid)listBox1.SelectedValue;
+            var torlendo = from x in users
+                           where x.ID == torlendoID
+                           select x;
+            users.Remove(torlendo.FirstOrDefault());
+
         }
     }
 }
